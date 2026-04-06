@@ -86,6 +86,9 @@ const updatePost = async (req, res, next) => {
     if (post.user.toString() !== req.user._id.toString()) {
       throw new UnauthorizedError("You can update only your own post");
     }
+    console.log("====================================");
+    console.log(req.body);
+    console.log("====================================");
 
     const { title, content, category } = req.body;
 
