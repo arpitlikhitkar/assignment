@@ -2,7 +2,6 @@ const express = require("express");
 const {
   createPost,
   getAllPosts,
-  getPostById,
   updatePost,
   searchPosts,
 } = require("../controllers/postController");
@@ -12,7 +11,6 @@ const router = express.Router();
 
 router.get("/", getAllPosts);
 router.get("/search", searchPosts);
-router.get("/:id", getPostById);
 router.post("/", protect, createPost);
 router.patch("/:id", protect, updatePost);
 

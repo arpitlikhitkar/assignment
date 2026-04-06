@@ -127,6 +127,7 @@ const getTopUsers = async (req, res, next) => {
           as: "user",
         },
       },
+      {$unwind: "$user"},
       {
         $project: {
           _id: 0,

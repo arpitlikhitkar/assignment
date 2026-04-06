@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const generateToken = require("../utils/jwt");
 const { BadRequestError, UnauthorizedError } = require("../utils/appError");
+const getPagination = require("../utils/pagination");
 
 const register = async (req, res, next) => {
   try {
@@ -16,7 +17,6 @@ const register = async (req, res, next) => {
     }
 
     const user = await User.create({ name, email, password });
-    const token = generateToken({ userId: user._id });
 
     res.status(201).json({
       success: true,
@@ -90,8 +90,25 @@ const getProfile = async (req, res, next) => {
   }
 };
 
+const allUsers = async (req, res, next) => {
+  try {
+    const { page, limit, skip } = getPagination(req.query);
+
+    const users = await User.find().skip(skip).limit(limit).select("-password");
+    const totalUser = await User.countDocuments();
+    res.status(200).json({
+      success: true,
+      data: users,
+      totalUser
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   register,
   login,
   getProfile,
+  allUsers,
 };

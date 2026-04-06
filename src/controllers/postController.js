@@ -155,7 +155,6 @@ const searchPosts = async (req, res, next) => {
 module.exports = {
   createPost,
   getAllPosts,
-  getPostById,
   updatePost,
   searchPosts,
 };

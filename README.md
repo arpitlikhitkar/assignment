@@ -162,7 +162,6 @@ Protected routes:
 - Comment APIs: done
 - Search API: done
 - Pagination: done
-- Aggregation with `$lookup`: done
 - Error handling: done
 - JWT: added
 - Bonus features: done

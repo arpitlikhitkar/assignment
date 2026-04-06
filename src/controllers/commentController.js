@@ -46,9 +46,10 @@ const getCommentsByPost = async (req, res, next) => {
       throw new NotFoundError("Post not found");
     }
 
-    const [comments, totalDocuments] = await Promise.all([
+    const [comments, totalDocuments] = await Promise.allSettled([
       Comment.find({ post: req.params.postId })
         .populate("user", "name email")
+        .populate("post", "title")
         .sort({ createdAt: -1 })
         .skip(skip)
         .limit(limit),
